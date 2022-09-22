@@ -1,11 +1,13 @@
-import Header from "./components/Header";
+import React from 'react';
 
-function App() {
+import Cards from './components/cards';
+
+const App = () => {
   return (
-    <div className="App">
-      <Header/>
-    </div>
+    <>
+      <Cards />
+    </>
   );
-}
+};
 
-export default App;
+export default App
