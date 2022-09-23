@@ -1,11 +1,14 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import Cards from './components/cards';
+import Routes from './routes/routes';
 
 const App = () => {
   return (
     <>
-      <Cards />
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
     </>
   );
 };

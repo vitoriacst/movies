@@ -6,6 +6,7 @@ import Header from '../components/Header';
 const Cards = () => {
   const [movies, setMovies] = useState([]);
   const [moviesDetails, setMoviesDetails] = useState([]);
+  const [moviesGenre, setMoviesGenre] = useState([]);
   const image = 'https://image.tmdb.org/t/p/w500/';
 
   useEffect(() => {
@@ -18,6 +19,19 @@ const Cards = () => {
       });
   }, []);
 
+  function findGenresById() {
+    const genres = [];
+    movies.forEach((movie, index) => {
+      moviesDetails.forEach((moviesGenre) => {
+        const test = movie.genre_ids[0] === moviesGenre.id;
+        if (test) {
+          genres.push(moviesGenre.name);
+        }
+      });
+    });
+    return genres;
+  }
+
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=d90f0c5adbb7cb8e15dc685ed00cd306`
@@ -28,30 +42,36 @@ const Cards = () => {
       });
   }, []);
 
+  useEffect(
+    (event) => {
+      setMoviesGenre(findGenresById());
+    },
+    [movies]
+  );
+
   let value = Math.floor(Math.random() * 100) + 1;
 
-   const findId = movies.map((element) =>
-    element.genre_ids !== null && element.genre_ids[0]
-);
-   console.log(findId);
+  const findId = movies.map(
+    (element) => element.genre_ids !== null && element.genre_ids[0]
+  );
+  //  console.log(findId);
+  // [53, 14, 12, 28, 28, 16, 14, 28, 53, 16, 28, 53, 53, 28, 12, 27, 28, 16, 35, 16]
 
-   const findGenres = moviesDetails.map((element) =>{
-     return element.id
-   } );
+  const findGenres = moviesDetails.map((element) => {
+    return element.id;
+  });
+  //[28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 10770, 53, 10752, 37]
 
-  //  const some = findGenres.filter((element)=> {
-  //   return element === findId
-  //  }
-  //  )
-  //  console.log(some);
-  console.log(findGenres);
+  console.log(findGenresById());
+
+  //  console.log(findGenres);
   return (
     <>
       <Header />
       <div className="flex flex-wrap gap-6 p-6 justify-center">
-        {movies.map((element,i) => {
+        {movies.map((element, index) => {
           return (
-            <div className="flex" key={i}>
+            <div className="flex" key={index}>
               <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <img
                   src={`${image}${element.poster_path}`}
@@ -64,14 +84,16 @@ const Cards = () => {
                       {element.title}
                     </h5>
                   </a>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mt-2">
                     <RiStarSmileLine className="mt-1" />
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                       {element.vote_average}
                     </p>
+                    <h1 className="font-mono ml-8">{moviesGenre[index]}</h1>
                   </div>
-                  <h1 className="font-bold">R${value}</h1>
-                  <h1 className="font-bold">{findGenres}</h1>
+                  <div className='flex items-center mb-6'>
+                    <h1 className="font-bold">R${value}</h1>
+                  </div>
                   <a
                     href="#"
                     className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-purple-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
