@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Checkout from '../pages/checkout';
-import Cards from '../components/cards'
+import Cards from '../components/Cards'
 
 const Routes = () => {
 

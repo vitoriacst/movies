@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { RiStarSmileLine } from 'react-icons/ri';
-import Header from '../components/Header';
+import Header from './Header';
 
 const Cards = () => {
   const [movies, setMovies] = useState([]);
@@ -91,7 +91,7 @@ const Cards = () => {
                     </p>
                     <h1 className="font-mono ml-8">{moviesGenre[index]}</h1>
                   </div>
-                  <div className='flex items-center mb-6'>
+                  <div className="flex items-center mb-6">
                     <h1 className="font-bold">R${value}</h1>
                   </div>
                   <a
