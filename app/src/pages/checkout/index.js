@@ -12,14 +12,15 @@ const Schema = yup.object().shape({
   cep: yup.number().required(),
   endereco: yup.string().required(),
   cidade: yup.string().required(),
-  estado: yup.string().required()
+  estado: yup.string().required(),
 });
 
 const Checkout = () => {
   return (
     <>
       <Header />
-      <div className="flex items-center justify-center p-8">
+      <h2 className="font-light lg:ml-40 ml-4 mt-10 text-2xl">Finalizar Compra</h2>
+      <div className="flex items-center justify-center p-8 flex-col">
         <form class="w-full max-w-lg">
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
@@ -33,7 +34,7 @@ const Checkout = () => {
                   cep: '',
                   endereco: '',
                   cidade: '',
-                  estado:''
+                  estado: '',
                 }}
               >
                 {({ errors, touched }) => (
@@ -51,7 +52,13 @@ const Checkout = () => {
                         name="firstName"
                         placeholder="Seu nome"
                       />
-                      {errors.firstName && <span>{errors.firstName}</span>}
+                      {errors.firstName && touched.firstName ? (
+                        <span className="font-bold text-red-600">
+                          {errors.firstName}
+                        </span>
+                      ) : (
+                        ''
+                      )}
                       <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                           <label
@@ -68,7 +75,9 @@ const Checkout = () => {
                             type="number"
                           />
                           {errors.cpf && touched.cpf ? (
-                            <span>{errors.cpf}</span>
+                            <span className="font-bold text-red-600">
+                              {errors.cpf}
+                            </span>
                           ) : (
                             ''
                           )}
@@ -88,7 +97,9 @@ const Checkout = () => {
                             mask="(99) 99 99999-9999"
                           />
                           {errors.celular && touched.celular ? (
-                            <span>{errors.celular}</span>
+                            <span className="font-bold text-red-600">
+                              {errors.celular}
+                            </span>
                           ) : (
                             ''
                           )}
@@ -111,7 +122,9 @@ const Checkout = () => {
                           placeholder="******************"
                         />
                         {errors.password && touched.password ? (
-                          <span>{errors.password}</span>
+                          <span className="font-bold text-red-600">
+                            {errors.password}
+                          </span>
                         ) : (
                           ''
                         )}
@@ -133,7 +146,9 @@ const Checkout = () => {
                           placeholder="Cep"
                         />
                         {errors.cep && touched.cep ? (
-                          <span>{errors.cep}</span>
+                          <span className="font-bold text-red-600">
+                            {errors.cep}
+                          </span>
                         ) : (
                           ''
                         )}
@@ -154,7 +169,9 @@ const Checkout = () => {
                         />
 
                         {errors.endereco && touched.endereco ? (
-                          <span>{errors.endereco}</span>
+                          <span className="font-bold text-red-600">
+                            {errors.endereco}
+                          </span>
                         ) : (
                           ''
                         )}
@@ -175,8 +192,10 @@ const Checkout = () => {
                           type="text"
                           placeholder="Cidade"
                         />
-                         {errors.cidade && touched.cidade ? (
-                          <span>{errors.cidade}</span>
+                        {errors.cidade && touched.cidade ? (
+                          <span className="font-bold text-red-600">
+                            {errors.cidade}
+                          </span>
                         ) : (
                           ''
                         )}
@@ -195,8 +214,10 @@ const Checkout = () => {
                           type="text"
                           placeholder="Estado"
                         />
-                         {errors.estado && touched.estado ? (
-                          <span>{errors.estado}</span>
+                        {errors.estado && touched.estado ? (
+                          <span className="font-bold text-red-600">
+                            {errors.estado}
+                          </span>
                         ) : (
                           ''
                         )}

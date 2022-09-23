@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { RiStarSmileLine } from 'react-icons/ri';
-import Header from './Header';
+import UseApi from '../hooks/useApi';
 
 const Cards = () => {
-  const [movies, setMovies] = useState([]);
-  const [moviesDetails, setMoviesDetails] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const image = 'https://image.tmdb.org/t/p/w500/';
 
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=d90f0c5adbb7cb8e15dc685ed00cd306&language=en-US`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setMovies(data.results);
-      });
-  }, []);
+  const { movies } = UseApi(
+    `https://api.themoviedb.org/3/movie/popular?api_key=d90f0c5adbb7cb8e15dc685ed00cd306&language=en-US`
+  );
+
+  const { moviesDetails } = UseApi(
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=d90f0c5adbb7cb8e15dc685ed00cd306`
+  );
 
   function findGenresById() {
     const genres = [];
@@ -32,15 +28,14 @@ const Cards = () => {
     return genres;
   }
 
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=d90f0c5adbb7cb8e15dc685ed00cd306`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setMoviesDetails(data.genres);
-      });
-  }, []);
+  function handleClick(event){
+    const{ value , name } = event.target
+    const teste = document.querySelectorAll('#title').item
+    const take = teste.name
+    console.log(take);
+    const movies = {moviesName: name , moviesValue: value }
+    localStorage.setItem('moviesData',movies)
+  }
 
   useEffect(
     (event) => {
@@ -50,24 +45,8 @@ const Cards = () => {
   );
 
   let value = Math.floor(Math.random() * 100) + 1;
-
-  const findId = movies.map(
-    (element) => element.genre_ids !== null && element.genre_ids[0]
-  );
-  //  console.log(findId);
-  // [53, 14, 12, 28, 28, 16, 14, 28, 53, 16, 28, 53, 53, 28, 12, 27, 28, 16, 35, 16]
-
-  const findGenres = moviesDetails.map((element) => {
-    return element.id;
-  });
-  //[28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 10770, 53, 10752, 37]
-
-  console.log(findGenresById());
-
-  //  console.log(findGenres);
   return (
     <>
-      <Header />
       <div className="flex flex-wrap gap-6 p-6 justify-center">
         {movies.map((element, index) => {
           return (
@@ -80,7 +59,7 @@ const Cards = () => {
                 />
                 <div className="p-5">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id='title' value={element.title}>
                       {element.title}
                     </h5>
                   </a>
@@ -94,9 +73,12 @@ const Cards = () => {
                   <div className="flex items-center mb-6">
                     <h1 className="font-bold">R${value}</h1>
                   </div>
-                  <a
-                    href="#"
+                  <button
+                   type='submit'
                     className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-purple-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleClick}
+                    value={movies.value}
+                    name={movies.title}
                   >
                     Adicionar
                     <svg
@@ -108,7 +90,7 @@ const Cards = () => {
                     >
                       <AiOutlineCheck />
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

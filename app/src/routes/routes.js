@@ -7,8 +7,8 @@ const Routes = () => {
 
   return (
     <Switch>
-      <Route path='/checkout' component={Checkout}/>
-      <Route path='/'  component={Cards}/>
+      <Route exact path='/checkout' component={Checkout}/>
+      <Route exact path='/'  component={Cards}/>
     </Switch>
    );
 }
