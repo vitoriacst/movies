@@ -1,150 +1,210 @@
 import React from 'react';
-import InputMask from 'react-input-mask';
+// import InputMask from 'react-input-mask';
 import Header from '../../components/Header';
+import { Field, Form, Formik } from 'formik';
+import * as yup from 'yup';
+
+const Schema = yup.object().shape({
+  firstName: yup.string().required(),
+  cpf: yup.number().required(),
+  celular: yup.number().max(13).required(),
+  password: yup.number().max(6).required(),
+  cep: yup.number().required(),
+  endereco: yup.string().required(),
+  cidade: yup.string().required(),
+  estado: yup.string().required()
+});
 
 const Checkout = () => {
   return (
     <>
-    <Header/>
+      <Header />
       <div className="flex items-center justify-center p-8">
         <form class="w-full max-w-lg">
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-password"
+              <Formik
+                validationSchema={Schema}
+                initialValues={{
+                  firstName: '',
+                  cpf: '',
+                  celular: '',
+                  password: '',
+                  cep: '',
+                  endereco: '',
+                  cidade: '',
+                  estado:''
+                }}
               >
-                Nome Completo
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-password"
-                type="password"
-                placeholder="seu nome"
-              />
-            </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-first-name"
-              >
-                CPF
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name"
-                type="text"
-                placeholder="CPF"
-              />
-            </div>
-            <div class="w-full md:w-1/2 px-3">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-last-name"
-              >
-                CELULAR
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-last-name"
-                type="text"
-                placeholder="Celular"
-              />
-            </div>
-          </div>
+                {({ errors, touched }) => (
+                  <Form>
+                    <div>
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="firstName"
+                      >
+                        Nome Completo
+                      </label>
+                      <Field
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="Seu nome"
+                      />
+                      {errors.firstName && <span>{errors.firstName}</span>}
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-first-name"
+                          >
+                            CPF
+                          </label>
+                          <Field
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            id="cpf"
+                            name="cpf"
+                            placeholder="CPF"
+                            type="number"
+                          />
+                          {errors.cpf && touched.cpf ? (
+                            <span>{errors.cpf}</span>
+                          ) : (
+                            ''
+                          )}
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-last-name"
+                          >
+                            CELULAR
+                          </label>
+                          <Field
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="celular"
+                            name="celular"
+                            placeholder="Celular"
+                            mask="(99) 99 99999-9999"
+                          />
+                          {errors.celular && touched.celular ? (
+                            <span>{errors.celular}</span>
+                          ) : (
+                            ''
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full px-3">
+                        <label
+                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          for="password"
+                        >
+                          Password
+                        </label>
+                        <Field
+                          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="password"
+                          name="password"
+                          type="password"
+                          placeholder="******************"
+                        />
+                        {errors.password && touched.password ? (
+                          <span>{errors.password}</span>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label
+                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          for="cep"
+                        >
+                          CEP
+                        </label>
+                        <Field
+                          class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          id="cep"
+                          name="cep"
+                          type="number"
+                          placeholder="Cep"
+                        />
+                        {errors.cep && touched.cep ? (
+                          <span>{errors.cep}</span>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div class="w-full md:w-1/2 px-3">
+                        <label
+                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          for="endereco"
+                        >
+                          ENDEREÇO
+                        </label>
+                        <Field
+                          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="endereco"
+                          name="endereco"
+                          type="text"
+                          placeholder="Endereço"
+                        />
 
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-password"
-              >
-                Password
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-password"
-                type="password"
-                placeholder="******************"
-              />
-            </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-password"
-              >
-                Nome Completo
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-password"
-                type="password"
-                placeholder="seu nome"
-              />
-            </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-first-name"
-              >
-                CEP
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name"
-                type="text"
-                placeholder="Cep"
-              />
-            </div>
-            <div class="w-full md:w-1/2 px-3">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-last-name"
-              >
-                ENDEREÇO
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-last-name"
-                type="text"
-                placeholder="Endereço"
-              />
-            </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-first-name"
-              >
-                CIDADE
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name"
-                type="text"
-                placeholder="cidade"
-              />
-            </div>
-            <div class="w-full md:w-1/2 px-3">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-last-name"
-              >
-                ESTADO
-              </label>
-              <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-last-name"
-                type="text"
-                placeholder="Estado"
-              />
+                        {errors.endereco && touched.endereco ? (
+                          <span>{errors.endereco}</span>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label
+                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          for="cidade"
+                        >
+                          CIDADE
+                        </label>
+                        <Field
+                          class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          id="cidade"
+                          name="cidade"
+                          type="text"
+                          placeholder="Cidade"
+                        />
+                         {errors.cidade && touched.cidade ? (
+                          <span>{errors.cidade}</span>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div class="w-full md:w-1/2 px-3">
+                        <label
+                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          for="estado"
+                        >
+                          ESTADO
+                        </label>
+                        <Field
+                          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="estado"
+                          name="estado"
+                          type="text"
+                          placeholder="Estado"
+                        />
+                         {errors.estado && touched.estado ? (
+                          <span>{errors.estado}</span>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
         </form>
