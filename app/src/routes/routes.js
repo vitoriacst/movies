@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Checkout from '../pages/checkout';
-import Cards from '../components/Cards'
+import Movies from '../pages/Home/Movies'
 
 const Routes = () => {
 
   return (
     <Switch>
       <Route exact path='/checkout' component={Checkout}/>
-      <Route exact path='/'  component={Cards}/>
+      <Route exact path='/'  component={Movies}/>
     </Switch>
    );
 }

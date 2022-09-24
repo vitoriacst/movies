@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { RiStarSmileLine } from 'react-icons/ri';
+import AppContext from '../contexts/AppContext';
 import UseApi from '../hooks/useApi';
 
 const Cards = () => {
   const [moviesGenre, setMoviesGenre] = useState([]);
+  const{productCart , setProductCart} = useContext(AppContext)
   const image = 'https://image.tmdb.org/t/p/w500/';
 
   const { movies } = UseApi(
@@ -28,13 +30,14 @@ const Cards = () => {
     return genres;
   }
 
-  function handleClick(event){
-    const{ value , name } = event.target
-    const teste = document.querySelectorAll('#title').item
-    const take = teste.name
-    console.log(take);
-    const movies = {moviesName: name , moviesValue: value }
-    localStorage.setItem('moviesData',movies)
+  let value = Math.floor(Math.random() * 100) + 1;
+
+  function handleClick(element){
+    const movies = {name: element.title , value}
+    const takeItems = JSON.parse(localStorage.getItem('moviesData')) || []
+    const newTakeItems = [...takeItems, movies ]
+    localStorage.setItem('moviesData', JSON.stringify(newTakeItems))
+    setProductCart(!productCart)
   }
 
   useEffect(
@@ -44,7 +47,6 @@ const Cards = () => {
     [movies]
   );
 
-  let value = Math.floor(Math.random() * 100) + 1;
   return (
     <>
       <div className="flex flex-wrap gap-6 p-6 justify-center">
@@ -59,7 +61,7 @@ const Cards = () => {
                 />
                 <div className="p-5">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id='title' value={element.title}>
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id='title'>
                       {element.title}
                     </h5>
                   </a>
@@ -74,9 +76,9 @@ const Cards = () => {
                     <h1 className="font-bold">R${value}</h1>
                   </div>
                   <button
-                   type='submit'
+                   type='button'
                     className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-purple-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={handleClick}
+                    onClick={()=>handleClick(element)}
                     value={movies.value}
                     name={movies.title}
                   >

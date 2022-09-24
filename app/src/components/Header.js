@@ -9,8 +9,7 @@ const Header = () => {
   const handleClick = () => {
     SetIsOpenCart(!isOpenCart);
   };
-
-  console.log(isOpenCart);
+const[movie , setMovie] = useState([])
 
   return (
     <>

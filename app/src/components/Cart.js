@@ -1,53 +1,38 @@
-import UseApi from "../hooks/useApi";
+import { useContext, useEffect, useState } from 'react';
+import AppContext from '../contexts/AppContext';
 
 const Cart = () => {
+  const { productCart } = useContext(AppContext);
+  const [cart, setCart] = useState([]);
+  const[totalPrice , setTotalPrice] = useState(0)
 
-  const {movies} = UseApi(`https://api.themoviedb.org/3/movie/popular?api_key=d90f0c5adbb7cb8e15dc685ed00cd306&language=en-US`)
-
+  useEffect(() => {
+    const takeItems = JSON.parse(localStorage.getItem('moviesData')) || [];
+    setCart(takeItems)
+    let total = takeItems.reduce((acc , {value})=> value + acc,0)
+    setTotalPrice(total)
+  }, [productCart]);
 
   return (
     <>
-      <div class="w-80 flex flex-col items-center justify-center h-full shadow-md bg-white border px-1 border-gray-100 absolute">
-    {
-      movies.map((movie, index)=>{
-        <h1>{movie.tile}</h1>
-      })
-    }
-        <h1>Meu Carrinho</h1>
-        <ul class="relative">
-          <li class="relative">
-            <a
-              class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-              href="#!"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Sidenav link 1
-            </a>
-          </li>
-          <li class="relative">
-            <a
-              class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-              href="#!"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Sidenav link 2
-            </a>
-          </li>
-          <li class="relative">
-            <a
-              class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-              href="#!"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Sidenav link 2
-            </a>
-          </li>
-        </ul>
-      </div>
+      <h1>Meu Carrinho</h1>
+        <div class="w-96 flex flex-col items-center justify-center h-full shadow-md bg-white border px-1 border-gray-100 absolute">
+          <ul class="relative">
+          {cart.map((element, index) => (
+            <li class="relative flex"  key={index}>
+                {element.name}
+                {element.value}
+            </li>
+          ))}
+          </ul>
+          <div>
+            <span className='text-red-900'>
+              total: {totalPrice}
+            </span>
+          </div>
+        </div>
     </>
   );
 };
+
 export default Cart;
