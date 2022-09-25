@@ -28,6 +28,20 @@ Pontos de melhoria
 - React router 
 - react-input-mask
 - yup
+
+## ✅  Para iniciar o projeto
+
+```javaScript
+ cd app
+```
+
+```javaScript
+  npm install
+```
+
+```javaScript
+  npm start
+```
  
 # 💡Lições aprendidas
 ```JavaScript
