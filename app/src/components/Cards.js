@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
+import { key } from '../configs/ApiKey';
 import AppContext from '../contexts/AppContext';
 import UseApi from '../hooks/useApi';
 
@@ -9,11 +10,11 @@ const Cards = () => {
   const image = 'https://image.tmdb.org/t/p/w500/';
 
   const { movies } = UseApi(
-    `https://api.themoviedb.org/3/movie/popular?api_key=d90f0c5adbb7cb8e15dc685ed00cd306&language=en-US`
+    `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US`
   );
 
   const { moviesDetails } = UseApi(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=d90f0c5adbb7cb8e15dc685ed00cd306`
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${key}`
   );
 
   function findGenresById() {

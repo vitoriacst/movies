@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { RiStarSmileLine } from 'react-icons/ri';
 import Header from '../../components/Header';
+import { key } from '../../configs/ApiKey';
 import AppContext from '../../contexts/AppContext';
 import UseApi from '../../hooks/useApi';
 
@@ -11,11 +12,11 @@ const Search = () => {
   const image = 'https://image.tmdb.org/t/p/w500/';
 
   const { searchMovies, setSearchMovies } = UseApi(
-    `https://api.themoviedb.org/3/search/movie?api_key=d90f0c5adbb7cb8e15dc685ed00cd306&language=en-US&page=1&include_adult=false?&query=%27%27`
+    `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&page=1&include_adult=false?&query=%27%27`
   );
 
   const { findByTerm } = UseApi(
-    `https://api.themoviedb.org/3/search/movie?api_key=d90f0c5adbb7cb8e15dc685ed00cd306&language=en-US&page=1&include_adult=false?&query=%27%27`
+    `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&page=1&include_adult=false?&query=%27%27`
   );
 
   const handleChange = ({ target: { value } }) => {
