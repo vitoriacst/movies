@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { RiStarSmileLine } from 'react-icons/ri';
 import AppContext from '../contexts/AppContext';
 import UseApi from '../hooks/useApi';
 
 const Cards = () => {
   const [moviesGenre, setMoviesGenre] = useState([]);
-  const{productCart , setProductCart} = useContext(AppContext)
+  const { productCart, setProductCart } = useContext(AppContext);
   const image = 'https://image.tmdb.org/t/p/w500/';
 
   const { movies } = UseApi(
@@ -32,12 +31,12 @@ const Cards = () => {
 
   let value = Math.floor(Math.random() * 100) + 1;
 
-  function handleClick(element){
-    const movies = {name: element.title , value}
-    const takeItems = JSON.parse(localStorage.getItem('moviesData')) || []
-    const newTakeItems = [...takeItems, movies ]
-    localStorage.setItem('moviesData', JSON.stringify(newTakeItems))
-    setProductCart(!productCart)
+  function handleClick(element) {
+    const movies = { name: element.title, value };
+    const takeItems = JSON.parse(localStorage.getItem('moviesData')) || [];
+    const newTakeItems = [...takeItems, movies];
+    localStorage.setItem('moviesData', JSON.stringify(newTakeItems));
+    setProductCart(!productCart);
   }
 
   useEffect(
@@ -53,7 +52,7 @@ const Cards = () => {
         {movies.map((element, index) => {
           return (
             <div className="flex" key={index}>
-              <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+              <div className="max-w-sm backdrop-blur-sm bg-white rounded-lg border border-black shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <img
                   src={`${image}${element.poster_path}`}
                   alt={element.title}
@@ -61,12 +60,42 @@ const Cards = () => {
                 />
                 <div className="p-5">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id='title'>
+                    <h5
+                      className="mb-2 text-2xl font-extrabold tracking-tight text-green-600 dark:text-white"
+                      id="title"
+                    >
                       {element.title}
                     </h5>
                   </a>
                   <div className="flex gap-2 mt-2">
-                    <RiStarSmileLine className="mt-1" />
+                    <div className="rating">
+                      <input
+                        type="radio"
+                        name="rating-2"
+                        className="mask mask-star-2 bg-orange-400"
+                      />
+                      <input
+                        type="radio"
+                        name="rating-2"
+                        className="mask mask-star-2 bg-orange-400"
+                        checked
+                      />
+                      <input
+                        type="radio"
+                        name="rating-2"
+                        className="mask mask-star-2 bg-orange-400"
+                      />
+                      <input
+                        type="radio"
+                        name="rating-2"
+                        className="mask mask-star-2 bg-orange-400"
+                      />
+                      <input
+                        type="radio"
+                        name="rating-2"
+                        className="mask mask-star-2 bg-orange-400"
+                      />
+                    </div>
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                       {element.vote_average}
                     </p>
@@ -76,9 +105,9 @@ const Cards = () => {
                     <h1 className="font-bold">R${value}</h1>
                   </div>
                   <button
-                   type='button'
-                    className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-purple-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={()=>handleClick(element)}
+                    type="button"
+                    className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-colors"
+                    onClick={() => handleClick(element)}
                     value={movies.value}
                     name={movies.title}
                   >
