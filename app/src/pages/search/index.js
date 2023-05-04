@@ -1,22 +1,22 @@
-import React, { useContext, useState } from 'react';
-import { AiOutlineCheck } from 'react-icons/ai';
-import { RiStarSmileLine } from 'react-icons/ri';
-import Header from '../../components/Header';
-import { key } from '../../configs/ApiKey';
-import AppContext from '../../contexts/AppContext';
-import UseApi from '../../hooks/useApi';
+import React, { useContext, useState } from "react";
+import { AiOutlineCheck } from "react-icons/ai";
+import { RiStarSmileLine } from "react-icons/ri";
+import Header from "../../components/Header";
+// import { key } from '../../configs/ApiKey';
+import AppContext from "../../contexts/AppContext";
+import UseApi from "../../hooks/useApi";
 
 const Search = () => {
-  const [movies, setMovies] = useState('');
+  const [movies, setMovies] = useState("");
   const { productCart, setProductCart } = useContext(AppContext);
-  const image = 'https://image.tmdb.org/t/p/w500/';
+  const image = "https://image.tmdb.org/t/p/w500/";
 
   const { searchMovies, setSearchMovies } = UseApi(
-    `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&page=1&include_adult=false?&query=%27%27`
+    `https://api.themoviedb.org/3/search/movie?api_key=e843b62ccda89c4fc4880f2b669634d5&language=en-US&page=1&include_adult=false?&query=%27%27`
   );
 
   const { findByTerm } = UseApi(
-    `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&page=1&include_adult=false?&query=%27%27`
+    `https://api.themoviedb.org/3/search/movie?api_key=e843b62ccda89c4fc4880f2b669634d5&language=en-US&page=1&include_adult=false?&query=%27%27`
   );
 
   const handleChange = ({ target: { value } }) => {
@@ -35,9 +35,9 @@ const Search = () => {
 
   function handleClick(element) {
     const movies = { name: element.title, value };
-    const takeItems = JSON.parse(localStorage.getItem('moviesData')) || [];
+    const takeItems = JSON.parse(localStorage.getItem("moviesData")) || [];
     const newTakeItems = [...takeItems, movies];
-    localStorage.setItem('moviesData', JSON.stringify(newTakeItems));
+    localStorage.setItem("moviesData", JSON.stringify(newTakeItems));
     setProductCart(!productCart);
   }
 

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import AppContext from '../contexts/AppContext';
+import { useContext, useEffect, useState } from "react";
+import AppContext from "../contexts/AppContext";
 
 const Cart = () => {
   const { productCart } = useContext(AppContext);
@@ -7,7 +7,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const takeItems = JSON.parse(localStorage.getItem('moviesData')) || [];
+    const takeItems = JSON.parse(localStorage.getItem("moviesData")) || [];
     setCart(takeItems);
     let total = takeItems.reduce((acc, { value }) => value + acc, 0);
     setTotalPrice(total);

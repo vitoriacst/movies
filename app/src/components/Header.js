@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { ImCart } from 'react-icons/im';
-import { useLocation } from 'react-router-dom';
-import Cart from './Cart';
+import React, { useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+import { ImCart } from "react-icons/im";
+import { useLocation } from "react-router-dom";
+import Cart from "./Cart";
 
 const Header = () => {
   const [isOpenCart, SetIsOpenCart] = useState(false);
@@ -24,8 +24,8 @@ const Header = () => {
             <a href="/search">
               <AiOutlineSearch className="text-2xl" />
             </a>
-            {location.pathname === '/checkout' ? (
-              ''
+            {location.pathname === "/checkout" ? (
+              ""
             ) : (
               <button onClick={handleClick}>
                 <ImCart className="text-2xl" />
@@ -34,7 +34,7 @@ const Header = () => {
           </section>
         </header>
       </div>
-      {isOpenCart ? <Cart /> : ''}
+      {isOpenCart ? <Cart /> : ""}
     </>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import AppContext from './AppContext';
+import React, { useState } from "react";
+import AppContext from "./AppContext";
 
 const AppProvider = (props) => {
   const { children } = props;

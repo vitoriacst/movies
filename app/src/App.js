@@ -1,10 +1,8 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Cards from './components/Cards';
-import AppProvider from './contexts/AppProvider';
-import Movies from './pages/Home/Movies';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppProvider from "./contexts/AppProvider";
 
-import Routes from './routes/routes';
+import Routes from "./routes/routes";
 
 const App = () => {
   return (

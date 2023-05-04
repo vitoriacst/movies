@@ -1,9 +1,9 @@
-import { Field, Form, Formik } from 'formik';
-import React from 'react';
-import InputMask from 'react-input-mask';
-import * as yup from 'yup';
-import FinalCart from '../../components/FinalCart';
-import Header from '../../components/Header';
+import { Field, Form, Formik } from "formik";
+import React from "react";
+import InputMask from "react-input-mask";
+import * as yup from "yup";
+import FinalCart from "../../components/FinalCart";
+import Header from "../../components/Header";
 
 const Schema = yup.object().shape({
   firstName: yup.string().required(),
@@ -31,14 +31,14 @@ const Checkout = () => {
               <Formik
                 validationSchema={Schema}
                 initialValues={{
-                  firstName: '',
-                  cpf: '',
-                  celular: '',
-                  password: '',
-                  cep: '',
-                  endereco: '',
-                  cidade: '',
-                  estado: '',
+                  firstName: "",
+                  cpf: "",
+                  celular: "",
+                  password: "",
+                  cep: "",
+                  endereco: "",
+                  cidade: "",
+                  estado: "",
                 }}
               >
                 {({ errors, touched }) => (
@@ -61,7 +61,7 @@ const Checkout = () => {
                           {errors.firstName}
                         </span>
                       ) : (
-                        ''
+                        ""
                       )}
                       <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -83,7 +83,7 @@ const Checkout = () => {
                               {errors.cpf}
                             </span>
                           ) : (
-                            ''
+                            ""
                           )}
                         </div>
                         <div class="w-full md:w-1/2 px-3">
@@ -105,7 +105,7 @@ const Checkout = () => {
                               {errors.celular}
                             </span>
                           ) : (
-                            ''
+                            ""
                           )}
                         </div>
                       </div>
@@ -130,7 +130,7 @@ const Checkout = () => {
                             {errors.password}
                           </span>
                         ) : (
-                          ''
+                          ""
                         )}
                       </div>
                     </div>
@@ -154,7 +154,7 @@ const Checkout = () => {
                             {errors.cep}
                           </span>
                         ) : (
-                          ''
+                          ""
                         )}
                       </div>
                       <div class="w-full md:w-1/2 px-3">
@@ -177,7 +177,7 @@ const Checkout = () => {
                             {errors.endereco}
                           </span>
                         ) : (
-                          ''
+                          ""
                         )}
                       </div>
                     </div>
@@ -201,7 +201,7 @@ const Checkout = () => {
                             {errors.cidade}
                           </span>
                         ) : (
-                          ''
+                          ""
                         )}
                       </div>
                       <div class="w-full md:w-1/2 px-3">
@@ -223,7 +223,7 @@ const Checkout = () => {
                             {errors.estado}
                           </span>
                         ) : (
-                          ''
+                          ""
                         )}
                       </div>
                     </div>

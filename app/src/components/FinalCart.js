@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import AppContext from '../contexts/AppContext';
+import { useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import AppContext from "../contexts/AppContext";
 
 const FinalCart = () => {
   const { productCart } = useContext(AppContext);
@@ -9,14 +9,14 @@ const FinalCart = () => {
 
   const alert = () => {
     Swal.fire(
-      'Compra efetuada com sucesso!',
-      'Agora prepare a pipoca e bom filme!',
-      'success'
+      "Compra efetuada com sucesso!",
+      "Agora prepare a pipoca e bom filme!",
+      "success"
     );
   };
 
   useEffect(() => {
-    const takeItems = JSON.parse(localStorage.getItem('moviesData')) || [];
+    const takeItems = JSON.parse(localStorage.getItem("moviesData")) || [];
     setCart(takeItems);
     let total = takeItems.reduce((acc, { value }) => value + acc, 0);
     setTotalPrice(total);
