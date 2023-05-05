@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <header className="bg-green-500 p-4 w-full flex justify-around items-center h-10 gap-2">
+        <header>
           <section className="flex justify-start items-start flex-wrap">
             <a href="/">
               <h1 className="text-black text-2xl">Meus Filmes</h1>

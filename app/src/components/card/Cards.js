@@ -2,23 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 // import { key } from '../configs/ApiKey';
 import AppContext from "../../contexts/AppContext";
-import UseApi from "../../hooks/useApi";
-import { StyledCard, StyledMoviesRow } from "./StyledCard.styled";
+import { StyledCard, StyledCardImage } from "./StyledCard.styled";
 import React from "react";
-import MovieCarousel from "./MoviesCarousel";
 
-const Cards = () => {
+const Cards = ({ movies, moviesDetails }) => {
   const [moviesGenre, setMoviesGenre] = useState([]);
   const { productCart, setProductCart } = useContext(AppContext);
   const image = "https://image.tmdb.org/t/p/w500/";
-
-  const { movies } = UseApi(
-    `https://api.themoviedb.org/3/movie/popular?api_key=e843b62ccda89c4fc4880f2b669634d5&language=en-US`
-  );
-
-  const { moviesDetails } = UseApi(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=e843b62ccda89c4fc4880f2b669634d5`
-  );
 
   function findGenresById() {
     const genres = [];
@@ -33,15 +23,15 @@ const Cards = () => {
     return genres;
   }
 
-  let value = Math.floor(Math.random() * 100) + 1;
+  const value = Math.floor(Math.random() * 100) + 1;
 
-  function handleClick(element) {
+  const handleClick = (element) => {
     const movies = { name: element.title, value };
     const takeItems = JSON.parse(localStorage.getItem("moviesData")) || [];
     const newTakeItems = [...takeItems, movies];
     localStorage.setItem("moviesData", JSON.stringify(newTakeItems));
     setProductCart(!productCart);
-  }
+  };
 
   useEffect(
     (event) => {
@@ -49,16 +39,16 @@ const Cards = () => {
     },
     [movies]
   );
-
-  const handleDragStart = (e) => e.preventDefault();
   return (
-    <div>
-      <MovieCarousel
-        movies={movies}
-        image={image}
-        handleDragStart={handleDragStart}
-      />
-    </div>
+    <>
+      {movies.map((movie, index) => {
+        return (
+          <StyledCard key={index}>
+            <StyledCardImage src={`${image}${movie.poster_path}`} />
+          </StyledCard>
+        );
+      })}
+    </>
   );
 };
 

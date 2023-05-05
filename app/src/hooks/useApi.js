@@ -5,6 +5,15 @@ const UseApi = (url) => {
   const [moviesDetails, setMoviesDetails] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [findByTerm, setFindByTerm] = useState([]);
+  const [romanceMovies, setRomancesMovies] = useState([]);
+  const [animationMovies, setAnimationsMovies] = useState([]);
+  const [terrorMovies, setTerrorMovies] = useState([]);
+  const [adventureMovies, setAdventureMovies] = useState([]);
+  const [comedyMovies, setComedyMovies] = useState([]);
+  const [scienceFictionMovies, setScienceFictionMovies] = useState([]);
+  const [warMovies, setWarMovies] = useState([]);
+
+  const [video, setVideo] = useState([]);
 
   useEffect(() => {
     fetch(url)
@@ -14,10 +23,35 @@ const UseApi = (url) => {
         setMoviesDetails(data.genres);
         setSearchMovies(data.results);
         setFindByTerm(data.results);
+        setRomancesMovies(data.results);
+        setAnimationsMovies(data.results);
+        setTerrorMovies(data.result);
+        setAdventureMovies(data.result);
+        setComedyMovies(data.result);
+        setScienceFictionMovies(data.result);
+        setWarMovies(data.result);
+        setVideo(data.results);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }, []);
 
-  return { movies, moviesDetails, searchMovies, setSearchMovies, findByTerm };
+  return {
+    movies,
+    moviesDetails,
+    searchMovies,
+    setSearchMovies,
+    findByTerm,
+    animationMovies,
+    romanceMovies,
+    terrorMovies,
+    adventureMovies,
+    comedyMovies,
+    scienceFictionMovies,
+    warMovies,
+    video,
+  };
 };
 
 export default UseApi;
