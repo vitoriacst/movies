@@ -5,7 +5,10 @@ import Header from "../../components/Header";
 import Video from "../../components/Video/Video";
 import UseApi from "../../hooks/useApi";
 import { StyledHomeCorridors } from "./style/StyledHome.style";
-import RomanceCorridor from "../../components/corridors/RomanceCorridor/ActionCorridor";
+import RomanceCorridor from "../../components/corridors/RomanceCorridor/RomanceCorridor";
+import TerrorCorridor from "../../components/corridors/TerrorCorridor/TerrorCorridor";
+import ComedyCorridor from "../../components/corridors/ComedyCorridor/ComedyCorridor";
+import Categories from "../../components/categories/categories";
 
 const Movie = () => {
   const image = "https://image.tmdb.org/t/p/w500/";
@@ -27,11 +30,12 @@ const Movie = () => {
         image={image}
         handleDragStart={handleDragStart}
       />
-      {/* <Cards movies={movies} moviesDetails={moviesDetails} /> */}
+      <Categories />
       <StyledHomeCorridors>
         <RomanceCorridor />
         <AnimationCorridor />
-        <Video />
+        <TerrorCorridor />
+        <ComedyCorridor />
       </StyledHomeCorridors>
     </>
   );

@@ -53,3 +53,25 @@ export const settings = {
     },
   ],
 };
+
+export const categories = [
+  "action",
+  "adventure",
+  "animation",
+  "comedy",
+  "crime",
+  "documentary",
+  "drama",
+  "family",
+  "fantasy",
+  "history",
+  "horror",
+  "music",
+  "mystery",
+  "romance",
+  "scienceFiction",
+  "cinemaTV",
+  "thriller",
+  "war",
+  "wildWest",
+];

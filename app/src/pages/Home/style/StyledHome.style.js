@@ -5,4 +5,5 @@ export const StyledHomeCorridors = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  background-color: black;
 `;

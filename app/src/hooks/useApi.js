@@ -25,11 +25,11 @@ const UseApi = (url) => {
         setFindByTerm(data.results);
         setRomancesMovies(data.results);
         setAnimationsMovies(data.results);
-        setTerrorMovies(data.result);
-        setAdventureMovies(data.result);
-        setComedyMovies(data.result);
-        setScienceFictionMovies(data.result);
-        setWarMovies(data.result);
+        setTerrorMovies(data.results);
+        setAdventureMovies(data.results);
+        setComedyMovies(data.results);
+        setScienceFictionMovies(data.results);
+        setWarMovies(data.results);
         setVideo(data.results);
       })
       .catch((error) => {
